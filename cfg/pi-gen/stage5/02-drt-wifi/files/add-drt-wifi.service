@@ -1,0 +1,11 @@
+[Unit]
+Description=Add DRT wifi networks
+Before=networking.service
+
+[Service]
+Type=oneshot
+ExecStart=/opt/drt-wifi/add-drt-wifi.sh
+
+[Install]
+RequiredBy=network.target
+

@@ -1,0 +1,7 @@
+
+network={
+	ssid="West5"
+	psk=
+	key_mgmt=WPA-PSK
+	priority=3
+}

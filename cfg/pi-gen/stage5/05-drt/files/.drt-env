@@ -1,0 +1,5 @@
+PYTHONPATH=/home/drt/src/drtbot/software/Lib
+DrtConfigRoot=/home/drt/src/drtbot/config
+DrtLogRoot=/home/drt/log
+
+export PYTHONPATH DrtConfigRoot DrtLogRoot

@@ -1,0 +1,7 @@
+
+network={
+	ssid="DRT"
+	psk=
+	key_mgmt=WPA-PSK
+	priority=5
+}

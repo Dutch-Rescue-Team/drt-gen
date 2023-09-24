@@ -1,0 +1,7 @@
+
+network={
+	ssid="NT-DEV"
+	psk=
+	key_mgmt=WPA-PSK
+	priority=3
+}

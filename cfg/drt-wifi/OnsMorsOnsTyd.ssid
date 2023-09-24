@@ -1,0 +1,7 @@
+
+network={
+	ssid="OnsMorsOnsTyd"
+	psk=
+	key_mgmt=WPA-PSK
+	priority=1
+}

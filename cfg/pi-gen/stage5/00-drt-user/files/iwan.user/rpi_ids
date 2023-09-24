@@ -1,0 +1,4 @@
+# Raspberry Pi id : label : hostname*
+# * Empty for default.
+10000000e40cae90::drt-e1
+
