@@ -71,6 +71,10 @@ TARGET_USER_DIR=$DEST_GEN_DIR/stage5/00-drt-user/files
 source $DEST_GEN_DIR/config
 sed "s/DEFAULT_HOSTNAME=/DEFAULT_HOSTNAME=$TARGET_HOSTNAME/g" $SRC_CFG_DIR/drt-user/defaults.cfg > $TARGET_USER_DIR/defaults.cfg
 
+# Log current drt-gen git status.
+mkdir -p $DEST_WORK_DIR
+(git -C "$SRC_ROOT_DIR" status ; git -C "$SRC_ROOT_DIR" diff) > "$DEST_WORK_DIR/drt-gen_git_status.log"
+
 # Run pi-gen.
 cd $DEST_GEN_DIR
 ./build.sh

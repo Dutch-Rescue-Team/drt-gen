@@ -10,7 +10,11 @@ The advanced options in Imager can be used.
   * Otherwise, you can still connect via ethernet.
 * NOTE: Sometimes the pre-configured wifi connections will only be available after the second boot.
 
-You can connect using ssh, vnc client and rdp client.
+You can connect using:
+* ssh
+* vnc client
+* rdp client
+* Visual Studio Code via Remote-SSH
 
 ## Preconfigured wifi networks
 Priorities don´t work yet.
@@ -52,8 +56,12 @@ After installation this information is available in directory /var/log/drt-gen.
 * pip_list: All python packages, including version.
 * pkg_query: All installed os packages including version.
 
+## Check config used for generation
+The git status of the configuration used for the image generation can be found in file /var/log/drt-gen/drt-gen_git_status.log.
+
 ## DRT environment
 * Directory $HOME/log
+* Directory $HOME/src
 * File $HOME/.drt-env takes care of setting environment variables:
   * PYTHONPATH
   * DrtConfigRoot
