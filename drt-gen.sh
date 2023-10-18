@@ -33,7 +33,11 @@ mkdir -p $DRT_IMG_DIR
 DEST_GEN_DIR=$DRT_IMG_DIR/pi-gen
 if [[ -f $DEST_GEN_DIR ]]; then rm -f $DEST_GEN_DIR/; fi
 if [[ -d $DEST_GEN_DIR ]]; then rm -r -f $DEST_GEN_DIR; fi
-git clone --depth 1 $PI_GEN_GIT_REPO $DEST_GEN_DIR
+# git clone --depth 1 $PI_GEN_GIT_REPO $DEST_GEN_DIR
+git clone $PI_GEN_GIT_REPO $DEST_GEN_DIR
+cd $DEST_GEN_DIR
+echo $PI_GEN_GIT_REPO_HASH
+git checkout $PI_GEN_GIT_REPO_HASH
 
 # Replace default stage definitions with drt-gen.
 rm -r $DEST_GEN_DIR/stage*
@@ -90,4 +94,3 @@ mkdir -p $DEST_WORK_DIR
 # Run pi-gen.
 cd $DEST_GEN_DIR
 ./build.sh
-
