@@ -3,6 +3,6 @@
 DRT_GEN_LOG="${ROOTFS_DIR}/var/log/drt-gen"
 install -d "${DRT_GEN_LOG}"
 
-# drt-gen_git_status.log is generated in drt-gen.sh
-install -m 644  "$WORK_DIR/drt-gen_git_status.log" "${DRT_GEN_LOG}/drt-gen_git_status.log"
-
+# Git status log files are generated in drt-gen.sh
+install -m 644 -t "${DRT_GEN_LOG}" "files/drt-gen_git_status.log"
+install -m 644 -t "${DRT_GEN_LOG}" "files/pi-gen_git_status.log"

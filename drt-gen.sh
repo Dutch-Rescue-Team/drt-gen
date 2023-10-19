@@ -33,10 +33,8 @@ mkdir -p $DRT_IMG_DIR
 DEST_GEN_DIR=$DRT_IMG_DIR/pi-gen
 if [[ -f $DEST_GEN_DIR ]]; then rm -f $DEST_GEN_DIR/; fi
 if [[ -d $DEST_GEN_DIR ]]; then rm -r -f $DEST_GEN_DIR; fi
-# git clone --depth 1 $PI_GEN_GIT_REPO $DEST_GEN_DIR
 git clone $PI_GEN_GIT_REPO $DEST_GEN_DIR
 cd $DEST_GEN_DIR
-echo $PI_GEN_GIT_REPO_HASH
 git checkout $PI_GEN_GIT_REPO_HASH
 
 # Replace default stage definitions with drt-gen.
@@ -44,9 +42,11 @@ rm -r $DEST_GEN_DIR/stage*
 cp -r $SRC_CFG_DIR/pi-gen/stage* $DEST_GEN_DIR
 
 # Remove previous pi-gen work directory to ensure consistent results.
+echo Start removing previous pi-gen work directory.
 DEST_WORK_DIR=$DRT_IMG_DIR/work
 if [[ -f $DEST_WORK_DIR ]]; then rm -f $DEST_WORK_DIR/; fi
 if [[ -d $DEST_WORK_DIR ]]; then rm -r -f $DEST_WORK_DIR; fi
+echo Done removing previous pi-gen work directory.
 
 # Complete and copy config from template.
 FIRST_USER_NAME=$(cat $KDBX_PWD_FILE | keepassxc-cli show -a username $KDBX_FILE "first user") 
@@ -70,26 +70,46 @@ for FP in $SRC_CFG_DIR/drt-wifi/*.ssid; do
   sed "s/psk=/psk=$PSK/g" $FP > $TARGET_WIFI_DIR/$F
 done
 
+# Complete and copy vnc-server file.
+SRC_VNC_FILE=$SRC_CFG_DIR/vnc-server/common.custom
+TARGET_VNC_FILE=$DEST_GEN_DIR/stage5/06-vnc-server/files/common.custom
+VNC_HASH=$(cat $KDBX_PWD_FILE | keepassxc-cli show -a password $KDBX_FILE "VNC Server - hash")
+sed "s/Password=/Password=$VNC_HASH/g" $SRC_VNC_FILE > $TARGET_VNC_FILE
+
 # Provide default hostname for user settings.
 TARGET_USER_DIR=$DEST_GEN_DIR/stage5/00-drt-user/files
 source $DEST_GEN_DIR/config
 sed "s/DEFAULT_HOSTNAME=/DEFAULT_HOSTNAME=$TARGET_HOSTNAME/g" $SRC_CFG_DIR/drt-user/defaults.cfg > $TARGET_USER_DIR/defaults.cfg
 
-# Log current drt-gen git status.
-mkdir -p $DEST_WORK_DIR
-#(git -C "$SRC_ROOT_DIR" status ; git -C "$SRC_ROOT_DIR" diff) > "$DEST_WORK_DIR/drt-gen_git_status.log"
-
+# Log current pi-gen git status.
+cd $DEST_GEN_DIR
+TARGET_GIT_STATUS_FILE=$DEST_GEN_DIR/stage5/99-gen-meta/files/pi-gen_git_status.log
 (
   echo "***"
   echo "* git last commit"
   echo "***"
-  git -C "$SRC_ROOT_DIR" log -n 1
+  git log -n 1
   echo ""
   echo "***"
   echo "* git status -v -v"
   echo "***"
-  git -C "$SRC_ROOT_DIR" status -v -v
-) > "$DEST_WORK_DIR/drt-gen_git_status.log"
+  git status -v -v
+) > "$TARGET_GIT_STATUS_FILE"
+
+# Log current drt-gen git status.
+cd $SRC_ROOT_DIR
+TARGET_GIT_STATUS_FILE=$DEST_GEN_DIR/stage5/99-gen-meta/files/drt-gen_git_status.log
+(
+  echo "***"
+  echo "* git last commit"
+  echo "***"
+  git log -n 1
+  echo ""
+  echo "***"
+  echo "* git status -v -v"
+  echo "***"
+  git status -v -v
+) > "$TARGET_GIT_STATUS_FILE"
 
 # Run pi-gen.
 cd $DEST_GEN_DIR
