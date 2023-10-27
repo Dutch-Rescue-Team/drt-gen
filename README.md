@@ -14,6 +14,7 @@ You can connect using:
 * ssh
 * vnc client
   * NOTE: Insecure authentication is used to allow non-realvnc clients. So an SSH Gateway should be used.
+  * NOTE: Some vnc clients won't connect with a new host until the remote host is accepted as known host using a plain ssh connection (e.g. MobaXterm).
 * rdp client
 * Visual Studio Code via Remote-SSH
 
