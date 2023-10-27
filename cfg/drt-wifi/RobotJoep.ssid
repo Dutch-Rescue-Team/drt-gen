@@ -1,7 +1,7 @@
 
 network={
-	ssid="West5"
+	ssid="RobotJoep"
 	psk=
 	key_mgmt=WPA-PSK
-	priority=1
+	priority=3
 }
