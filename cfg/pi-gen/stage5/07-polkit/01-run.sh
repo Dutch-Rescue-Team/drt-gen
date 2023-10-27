@@ -1,5 +1,7 @@
 #!/bin/bash -e
 
-POLKIT_DIR="${ROOTFS_DIR}/etc/polkit-1/localauthority/50-local.d"
-install -m 644 -t "${POLKIT_DIR}" files/45-allow-colord.pkla
-install -m 644 -t "${POLKIT_DIR}" files/46-allow-update-repo.pkla
+POLKIT_LA_DIR="${ROOTFS_DIR}/etc/polkit-1/localauthority"
+POLKIT_DIR="${POLKIT_LA_DIR}/55-drt.d"
+chmod 755 "${POLKIT_LA_DIR}"
+install -v -m 755 -d "${POLKIT_DIR}"
+install -v -m 644 -t "${POLKIT_DIR}" files/*.pkla
