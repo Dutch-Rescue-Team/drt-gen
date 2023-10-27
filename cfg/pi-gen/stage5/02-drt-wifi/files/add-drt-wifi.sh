@@ -24,12 +24,6 @@ else
   install -m 600 $DRT_WIFI_DIR/wpa_supplicant_base.conf $TMP_FILE
 fi
 
-# Add country if missing.
-COUNT=$(cat $TMP_FILE | grep "country=" | wc -l)
-if [[ $COUNT -eq 0 ]] ; then
-  cat $DRT_WIFI_DIR/wpa_supplicant_country.conf >> $TMP_FILE
-fi
-
 # Add section for each available SSID not configured yet.
 for FP in $DRT_WIFI_DIR/*.ssid; do
   F=$(basename $FP)
