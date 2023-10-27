@@ -13,15 +13,18 @@ The advanced options in Imager can be used.
 You can connect using:
 * ssh
 * vnc client
+  * NOTE: Insecure authentication is used to allow non-realvnc clients. So an SSH Gateway should be used.
 * rdp client
 * Visual Studio Code via Remote-SSH
 
 ## Preconfigured wifi networks
-Priorities don´t work yet.
 * DRT - prio 5
-* wavelan2 - prio 3
+* NT-DEV - prio 3
+* OnsMorsOnsTyd - prio 1
+* RobotJoep - prio 3
+* wavelan2 - prio 1
 * West2 - prio 1
-* West5 - prio 3
+* West5 - prio 1
 
 ## Default values
 * Hostname: drtbot
@@ -31,6 +34,7 @@ Priorities don´t work yet.
 * SSH - enabled
 * VNC Server 1920x1080
 * RDP Server
+* Minicom
 * Git
 * Git Cola - GIT GUI (https://git-cola.github.io/)
 * GitHub CLI
@@ -69,3 +73,5 @@ The git status of the configuration used for the image generation can be found i
 * At the end of $HOME/.bashrc .drt-env is sourced.
 * At the end of $HOME/.profile .drt-env is sourced.
 
+## drt scripts
+* ~/bin/rtc : start minicom for communication with the RTC
