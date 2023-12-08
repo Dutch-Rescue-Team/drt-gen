@@ -1,6 +1,5 @@
 expect
 git-cola
-minicom
 mu-editor
 pwgen
 python3-opencv
